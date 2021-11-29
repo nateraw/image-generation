@@ -36,7 +36,7 @@ def styleganv3(pretrained: str = 'art'):
         url = pretrained
     elif pretrained in _model_map:
         if pretrained == 'hysts/stylegan3-anime-face-exp001-model':
-            fpath = hf_hub_download(pretrained, _model_map[pretrained])
+            fpath = hf_hub_download(pretrained, _model_map[pretrained], force_filename=_model_map[pretrained])
             return StyleGAN3ImageGenerationPipeline(fpath)
         url = _model_map.get(pretrained, None)
     elif '/' in pretrained and len(pretrained.split('/')) == 2:
