@@ -17,8 +17,8 @@ def model_map():
 def styleganv3(pretrained: str = 'art'):
     if pretrained.startswith('https://'):
         url = pretrained
-    elif pretrained in model_map:
-        url = model_map.get(pretrained, None)
+    elif pretrained in _model_map:
+        url = _model_map.get(pretrained, None)
     elif '/' in pretrained and len(pretrained.split('/')) == 2:
         url = 'https://hf.co/{pretrained}/resolve/main/model.pkl'
     else:
