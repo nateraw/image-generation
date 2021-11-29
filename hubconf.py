@@ -22,8 +22,8 @@ nvidia_models = [
 ]
 
 _model_map = {
-    'art': 'https://drive.google.com/uc?id=18MOpwTMJsl_Z17q-wQVnaRLCUFZYSNkj',
-    'landscapes': 'https://drive.google.com/uc?id=14UGDDOusZ9TMb-pOrF0PAjMGVWLSAii1',
+    'wikiart-1024': 'https://drive.google.com/uc?id=18MOpwTMJsl_Z17q-wQVnaRLCUFZYSNkj',
+    'landscapes-256': 'https://drive.google.com/uc?id=14UGDDOusZ9TMb-pOrF0PAjMGVWLSAii1',
     **{m: f'{stylegan_url}{m}' for m in nvidia_models},
 }
 
