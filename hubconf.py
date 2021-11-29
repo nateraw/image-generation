@@ -24,7 +24,6 @@ nvidia_models = [
 _model_map = {
     'wikiart-1024': 'https://drive.google.com/uc?id=18MOpwTMJsl_Z17q-wQVnaRLCUFZYSNkj',
     'landscapes-256': 'https://drive.google.com/uc?id=14UGDDOusZ9TMb-pOrF0PAjMGVWLSAii1',
-    'hysts/stylegan3-anime-face-exp001-model': '006600.pkl',
     **{m: f'{stylegan_url}{m}' for m in nvidia_models},
 }
 
@@ -35,9 +34,6 @@ def styleganv3(pretrained: str = 'art'):
     if pretrained.startswith('https://'):
         url = pretrained
     elif pretrained in _model_map:
-        if pretrained == 'hysts/stylegan3-anime-face-exp001-model':
-            fpath = hf_hub_download(pretrained, _model_map[pretrained], force_filename=_model_map[pretrained])
-            return StyleGAN3ImageGenerationPipeline(fpath)
         url = _model_map.get(pretrained, None)
     elif '/' in pretrained and len(pretrained.split('/')) == 2:
         url = 'https://hf.co/{pretrained}/resolve/main/model.pkl'
