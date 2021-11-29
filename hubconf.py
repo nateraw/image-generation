@@ -5,8 +5,6 @@ from huggingface_stylegan3 import StyleGAN3ImageGenerationPipeline
 stylegan_url = 'https://api.ngc.nvidia.com/v2/models/nvidia/research/stylegan3/versions/1/files/'
 
 nvidia_models = [
-    'stylegan3-t-afhqv2-512x512.pkl',
-    'stylegan3-r-afhqv2-512x512.pkl'
     "stylegan3-t-ffhq-1024x1024.pkl",
     "stylegan3-t-ffhqu-1024x1024.pkl",
     "stylegan3-t-ffhqu-256x256.pkl",
@@ -24,6 +22,7 @@ nvidia_models = [
 _model_map = {
     'wikiart-1024': 'https://drive.google.com/uc?id=18MOpwTMJsl_Z17q-wQVnaRLCUFZYSNkj',
     'landscapes-256': 'https://drive.google.com/uc?id=14UGDDOusZ9TMb-pOrF0PAjMGVWLSAii1',
+    'anime': 'https://huggingface.co/hysts/stylegan3-anime-face-exp001-model/resolve/main/006600.pkl',
     **{m: f'{stylegan_url}{m}' for m in nvidia_models},
 }
 
