@@ -1,17 +1,16 @@
-
 from typing import List, Optional, Tuple, Union
 
+import dnnlib
+import legacy
 import numpy as np
 import PIL.Image
 import torch
 
-import legacy
-import dnnlib
 
-def make_transform(translate: Tuple[float,float], angle: float):
+def make_transform(translate: Tuple[float, float], angle: float):
     m = np.eye(3)
-    s = np.sin(angle/360.0*np.pi*2)
-    c = np.cos(angle/360.0*np.pi*2)
+    s = np.sin(angle / 360.0 * np.pi * 2)
+    c = np.cos(angle / 360.0 * np.pi * 2)
     m[0][0] = c
     m[0][1] = s
     m[0][2] = translate[0]
@@ -23,13 +22,21 @@ def make_transform(translate: Tuple[float,float], angle: float):
 
 class StyleGAN3ImageGenerationPipeline:
     def __init__(self, pkl_filepath_or_url='wikiart-1024-stylegan3-t-17.2Mimg.pkl', device: str = None):
-        
+
         self.device = torch.device(device or ('cuda' if torch.cuda.is_available() else 'cpu'))
 
         with dnnlib.util.open_url(pkl_filepath_or_url) as f:
             self.G = legacy.load_network_pkl(f)['G_ema'].to(self.device)
 
-    def __call__(self, seed: int = 42, truncation_psi: float = 1., class_idx: Optional[int] = None, noise_mode: str = 'const', translate: Tuple[int] = (0, 0), rotate: float = 0.):
+    def __call__(
+        self,
+        seed: int = 42,
+        truncation_psi: float = 1.0,
+        class_idx: Optional[int] = None,
+        noise_mode: str = 'const',
+        translate: Tuple[int] = (0, 0),
+        rotate: float = 0.0,
+    ):
 
         # Labels.
         self.label = torch.zeros([1, self.G.c_dim], device=self.device)
@@ -39,7 +46,7 @@ class StyleGAN3ImageGenerationPipeline:
             self.label[:, class_idx] = 1
         else:
             if class_idx is not None:
-                print ('warn: --class=lbl ignored when running on an unconditional network')
+                print('warn: --class=lbl ignored when running on an unconditional network')
 
         # Generate images.
         z = torch.from_numpy(np.random.RandomState(seed).randn(1, self.G.z_dim)).to(self.device)
