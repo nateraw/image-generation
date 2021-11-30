@@ -1,7 +1,4 @@
-import gdown
-
-from huggingface_stylegan3 import StyleGAN3ImageGenerationPipeline
-from huggingface_hub import hf_hub_download
+from stylegan3 import StyleGAN3ImageGenerationPipeline, StyleGAN3VideoGenerationPipeline
 
 
 stylegan_url = 'https://api.ngc.nvidia.com/v2/models/nvidia/research/stylegan3/versions/1/files/'
@@ -30,7 +27,7 @@ _model_map = {
 def model_map():
     return _model_map
 
-def styleganv3(pretrained: str = 'art'):
+def styleganv3(pretrained: str = 'art', videos: bool = False):
     if pretrained.startswith('https://'):
         url = pretrained
     elif pretrained in _model_map:
@@ -39,4 +36,5 @@ def styleganv3(pretrained: str = 'art'):
         url = 'https://hf.co/{pretrained}/resolve/main/model.pkl'
     else:
         raise ValueError(f'Model {pretrained} not found')
-    return StyleGAN3ImageGenerationPipeline(url)
+    return StyleGAN3ImageGenerationPipeline(url) if not videos else StyleGAN3VideoGenerationPipeline(url)
+
