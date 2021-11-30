@@ -1,17 +1,9 @@
-from typing import List, Optional, Tuple, Union
-
 import dnnlib
 import legacy
 import numpy as np
-import PIL.Image
 import torch
-import copy
-import os
-import re
-from typing import List, Optional, Tuple, Union
+from typing import List, Tuple
 
-# import click
-# import dnnlib
 import imageio
 import numpy as np
 import scipy.interpolate
