@@ -19,8 +19,8 @@ nvidia_models = [
 ]
 
 _model_map = {
-    'wikiart-1024': 'https://drive.google.com/uc?id=18MOpwTMJsl_Z17q-wQVnaRLCUFZYSNkj',
-    'landscapes-256': 'https://drive.google.com/uc?id=14UGDDOusZ9TMb-pOrF0PAjMGVWLSAii1',
+    'wikiart-1024': 'https://archive.org/download/wikiart-1024-stylegan3-t-17.2Mimg/wikiart-1024-stylegan3-t-17.2Mimg.pkl',
+    'landscapes-256': 'https://archive.org/download/lhq-256-stylegan3-t-25Mimg/lhq-256-stylegan3-t-25Mimg.pkl',
     **{m: f'{stylegan_url}{m}' for m in nvidia_models},
 }
 
