@@ -26,7 +26,8 @@ class StyleGAN3ImageGenerationPipeline:
         self.device = torch.device(device or ('cuda' if torch.cuda.is_available() else 'cpu'))
 
         with dnnlib.util.open_url(pkl_filepath_or_url) as f:
-            self.G = legacy.load_network_pkl(f)['G_ema'].to(self.device)
+#             self.G = legacy.load_network_pkl(f)['G_ema'].to(self.device)
+            self.G = pickle.load(f)['G_ema'].to(self.device)
 
     def __call__(
         self,
